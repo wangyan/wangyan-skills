@@ -6,9 +6,6 @@ Thumbs.db
 .vscode/
 .claude/
 .kilocode/
-AGENTS.md
-GEMINI.md
-CLAUDE.md
 
 # 构建产物
 unpackage/
@@ -24,3 +21,9 @@ logs/
 # 临时文件
 *.tmp
 *.bak
+
+# 规则文件
+AGENTS.md
+GEMINI.md
+CLAUDE.md
+CHANGELOG_GUIDE.md
