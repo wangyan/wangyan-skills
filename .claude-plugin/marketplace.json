@@ -1,0 +1,44 @@
+{
+  "name": "wangyan-skills",
+  "owner": {
+    "name": "wangyan",
+    "email": "me@wangyan.org"
+  },
+  "metadata": {
+    "description": "Skills shared by wangyan for improving daily work efficiency",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "content-skills",
+      "description": "Content generation and publishing skills",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/wangyan-article-illustrator",
+        "./skills/wangyan-cover-image"
+      ]
+    },
+    {
+      "name": "generation-skills",
+      "description": "AI-powered generation backends",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/wangyan-gemini-image-gen"
+      ]
+    },
+    {
+      "name": "utility-skills",
+      "description": "Utility tools for content processing",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/wangyan-compress-image",
+        "./skills/wangyan-url-to-markdown",
+        "./skills/wangyan-format-markdown",
+        "./skills/wangyan-markdown-to-html"
+      ]
+    }
+  ]
+}
