@@ -123,73 +123,28 @@ uv run {baseDir}/scripts/generate_image.py --prompt "描述" --filename "output.
 
 ## ⚙️ 配置参考
 
-优先级：命令行参数 > 环境变量 > `~/.openclaw/openclaw.json`
+优先级：命令行参数 > 环境变量
 
-| 参数 | 环境变量 | openclaw.json 字段 | 说明 |
-|------|---------|-------------------|------|
-| `--api-key` / `-k` | `GEMINI_API_KEY` | `apiKey` | API 密钥（必填） |
-| `--base-url` / `-b` | `GEMINI_BASE_URL` | `baseUrl` | API 端点 URL（必填） |
-| `--model` / `-m` | `GEMINI_MODEL` | `model` | 模型名称（默认自动轮询） |
-| `--api-format` / `-F` | `GEMINI_API_FORMAT` | `apiFormat` | `openai`（默认）或 `google` |
-| `--timeout` / `-t` | `GEMINI_TIMEOUT` | `timeout` | 超时秒数（默认 300） |
-| `--resolution` / `-r` | `GEMINI_RESOLUTION` | `resolution` | `1K`（默认）、`2K`、`4K` |
-| `--output-dir` / `-o` | `GEMINI_OUTPUT_DIR` | `outputDir` | 输出目录（默认 `output/images`） |
+| 参数 | 环境变量 | 说明 |
+|------|---------|------|
+| `--api-key` / `-k` | `GEMINI_API_KEY` | API 密钥（必填） |
+| `--base-url` / `-b` | `GEMINI_BASE_URL` | API 端点 URL（必填） |
+| `--model` / `-m` | `GEMINI_MODEL` | 模型名称（默认自动轮询） |
+| `--api-format` / `-F` | `GEMINI_API_FORMAT` | `openai`（默认）或 `google` |
+| `--timeout` / `-t` | `GEMINI_TIMEOUT` | 超时秒数（默认 300） |
+| `--resolution` / `-r` | `GEMINI_RESOLUTION` | `1K`（默认）、`2K`、`4K` |
+| `--output-dir` / `-o` | `GEMINI_OUTPUT_DIR` | 输出目录（默认 `output/images`） |
 
-### 完整配置示例
+### 环境变量配置示例
 
-> **注意**：一般情况下只需配置 `env` 中的环境变量即可，OpenClaw 会自动将其注入为脚本的环境变量。顶层字段（如 `apiKey`、`outputDir` 等）仅在需要覆盖环境变量或供其他工具读取时使用。
-
-在 `~/.openclaw/openclaw.json` 中的配置：
-
-```json
-{
-  "skills": {
-    "entries": {
-      "wangyan-gemini-image-gen": {
-        "enabled": true,
-        "env": {
-          "GEMINI_API_KEY": "your-api-key",
-          "GEMINI_BASE_URL": "https://api.example.com/v1",
-          "GEMINI_MODEL": "gemini-3.1-flash-image-preview",
-          "GEMINI_API_FORMAT": "openai",
-          "GEMINI_TIMEOUT": "300",
-          "GEMINI_RESOLUTION": "1K",
-          "GEMINI_OUTPUT_DIR": "output/images"
-        }
-      }
-    }
-  }
-}
-```
-
-如需同时配置顶层字段（优先级高于环境变量）：
-
-```json
-{
-  "skills": {
-    "entries": {
-      "wangyan-gemini-image-gen": {
-        "enabled": true,
-        "apiKey": "your-api-key",
-        "baseUrl": "https://api.example.com/v1",
-        "model": "gemini-3.1-flash-image-preview",
-        "apiFormat": "openai",
-        "timeout": 300,
-        "resolution": "1K",
-        "outputDir": "output/images",
-        "env": {
-          "GEMINI_API_KEY": "your-api-key",
-          "GEMINI_BASE_URL": "https://api.example.com/v1",
-          "GEMINI_MODEL": "gemini-3.1-flash-image-preview",
-          "GEMINI_API_FORMAT": "openai",
-          "GEMINI_TIMEOUT": "300",
-          "GEMINI_RESOLUTION": "1K",
-          "GEMINI_OUTPUT_DIR": "output/images"
-        }
-      }
-    }
-  }
-}
+```bash
+export GEMINI_API_KEY="your-api-key"
+export GEMINI_BASE_URL="https://api.example.com/v1"
+export GEMINI_MODEL="gemini-3.1-flash-image-preview"
+export GEMINI_API_FORMAT="openai"
+export GEMINI_TIMEOUT="300"
+export GEMINI_RESOLUTION="1K"
+export GEMINI_OUTPUT_DIR="output/images"
 ```
 
 可选参数：

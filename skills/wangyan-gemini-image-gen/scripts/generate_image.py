@@ -41,68 +41,39 @@ MODEL_FALLBACK_LIST = [
 
 
 # ---------------------------------------------------------------------------
-# 配置加载（CLI > 环境变量 > openclaw.json）
+# 配置加载（CLI > 环境变量）
 # ---------------------------------------------------------------------------
 
-def _load_openclaw_config() -> dict:
-    """从 ~/.openclaw/openclaw.json 读取技能配置作为兜底"""
-    try:
-        cfg_path = Path.home() / ".openclaw" / "openclaw.json"
-        if not cfg_path.exists():
-            return {}
-        import json as _json
-        with open(cfg_path) as f:
-            cfg = _json.load(f)
-        entry = (cfg.get("skills", {})
-                   .get("entries", {})
-                   .get("wangyan-gemini-image-gen", {}))
-        return {
-            "api_key": entry.get("apiKey"),
-            "base_url": entry.get("baseUrl"),
-            "model": entry.get("model"),
-            "api_format": entry.get("apiFormat"),
-            "timeout": entry.get("timeout"),
-            "resolution": entry.get("resolution"),
-            "output_dir": entry.get("outputDir"),
-        }
-    except Exception:
-        return {}
-
-
 def get_config(args) -> dict:
-    """合并配置：CLI 参数 > 环境变量 > openclaw.json"""
-    openclaw_cfg = _load_openclaw_config()
+    """合并配置：CLI 参数 > 环境变量"""
     return {
-        "api_key": (args.api_key
-                    or os.environ.get("GEMINI_API_KEY")
-                    or openclaw_cfg.get("api_key")),
-        "base_url": (args.base_url
-                     or os.environ.get("GEMINI_BASE_URL")
-                     or openclaw_cfg.get("base_url")),
+        "api_key": args.api_key or os.environ.get("GEMINI_API_KEY"),
+        "base_url": args.base_url or os.environ.get("GEMINI_BASE_URL"),
         "model": (
             args.model
             or os.environ.get("GEMINI_MODEL")
-            or openclaw_cfg.get("model")
-            or MODEL_FALLBACK_LIST[0]  # 默认使用第一个模型
+            or MODEL_FALLBACK_LIST[0]
         ),
         "api_format": (
             args.api_format
             or os.environ.get("GEMINI_API_FORMAT")
-            or openclaw_cfg.get("api_format", "openai")
+            or "openai"
         ),
         "timeout": (
             args.timeout
             or (int(t) if (t := os.environ.get("GEMINI_TIMEOUT")) else 0)
-            or openclaw_cfg.get("timeout", 0)
             or 300
         ),
-        "resolution": (args.resolution
-                       or os.environ.get("GEMINI_RESOLUTION")
-                       or openclaw_cfg.get("resolution", "1K")),
-        "output_dir": (args.output_dir
-                       or os.environ.get("GEMINI_OUTPUT_DIR")
-                       or openclaw_cfg.get("output_dir")
-                       or "output/images"),
+        "resolution": (
+            args.resolution
+            or os.environ.get("GEMINI_RESOLUTION")
+            or "1K"
+        ),
+        "output_dir": (
+            args.output_dir
+            or os.environ.get("GEMINI_OUTPUT_DIR")
+            or "output/images"
+        ),
     }
 
 
@@ -587,15 +558,11 @@ def main():
         print("配置方式：", file=sys.stderr)
         print("  1. --api-key 参数", file=sys.stderr)
         print("  2. GEMINI_API_KEY 环境变量", file=sys.stderr)
-        print("  3. ~/.openclaw/openclaw.json → skills.entries.wangyan-gemini-image-gen.apiKey",
-              file=sys.stderr)
-        print("     (通过 primaryEnv 自动注入为 GEMINI_API_KEY)", file=sys.stderr)
         sys.exit(1)
 
     if not config["base_url"]:
         print("错误：未提供 API 端点 URL。", file=sys.stderr)
-        print("配置方式：--base-url / GEMINI_BASE_URL / openclaw.json",
-              file=sys.stderr)
+        print("配置方式：--base-url / GEMINI_BASE_URL", file=sys.stderr)
         sys.exit(1)
 
     from PIL import Image as PILImage
