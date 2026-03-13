@@ -13,6 +13,11 @@
   - 更新错误提示信息，移除 openclaw.json 相关说明
 
 ### Documentation（文档）
-- **配置文档更新**（`skills/wangyan-gemini-image-gen/SKILL.md`）：
-  - 更新配置表格，移除 openclaw.json 字段列
-  - 替换 JSON 配置示例为环境变量配置示例
+- **项目文档完善**（`README.md`）：
+  - 新增项目介绍和技能分类说明
+  - 新增 skills CLI 和 Claude Code 两种安装方法
+  - 新增 Gemini 图片生成技能的依赖安装、使用方法和环境变量配置示例
+- **技能文档优化**（`skills/wangyan-gemini-image-gen/SKILL.md`）：
+  - 调整章节顺序，将"触发判断"移至"依赖安装"之前
+  - 更新环境变量配置示例为 JSON 格式
+  - 优化代码块格式和文档结构

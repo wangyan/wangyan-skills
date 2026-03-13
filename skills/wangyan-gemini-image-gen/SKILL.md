@@ -29,11 +29,19 @@ metadata:
       - nano-banana
       - nano-banana-pro
       - openai-compatible
+
 ---
 
 # Gemini Image Generator
 
 通过 `Nano Banana` 实现文生图、图片编辑与多图合成，支持 OpenAI 兼容和 Google 原生两种 API 格式，可自定义端点和密钥。
+
+---
+
+## 🎯 触发判断
+
+1. **触发词**：画图、生成图片、做logo/海报/图标/封面、P图、修图、合成图、draw/generate/create image/logo/banner  
+2. **不触发**：图片分析、OCR、格式转换、图片搜索、图片评价
 
 ---
 
@@ -43,18 +51,14 @@ metadata:
 
 ### 安装 Python 3
 
-**macOS:**
 ```bash
+# macOS
 brew install python3
-```
 
-**Ubuntu/Debian:**
-```bash
+# Ubuntu/Debian
 sudo apt update && sudo apt install python3 python3-pip
-```
 
-**CentOS/RHEL:**
-```bash
+#CentOS/RHEL
 sudo yum install python3 python3-pip
 ```
 
@@ -62,27 +66,16 @@ sudo yum install python3 python3-pip
 
 `uv` 是一个极速的 Python 包管理器，用于运行脚本和管理依赖。
 
-**macOS/Linux:**
 ```bash
+# macOS/Linux
 curl -LsSf https://astral.sh/uv/install.sh | sh
-```
 
-**或使用 pip:**
-```bash
+# 使用 pip
 pip install uv
-```
 
-安装完成后，确保 `uv` 在 PATH 中可用：
-```bash
+# 确保 `uv` 在 PATH 中可用
 uv --version
 ```
-
----
-
-## 🎯 触发判断
-
-1. **触发**：画图、生成图片、做logo/海报/图标/封面、P图、修图、合成图、draw/generate/create image/logo/banner  
-2. **不触发**：图片分析、OCR、格式转换、图片搜索、图片评价
 
 ---
 
@@ -110,7 +103,7 @@ uv run {baseDir}/scripts/generate_image.py --prompt "合成指令" --filename "c
 
 ```bash
 uv run {baseDir}/scripts/generate_image.py --prompt "描述" --filename "output.png" \
-  --base-url "https://example.com/v1" --api-key "sk-xxx" --model "gemini-3-pro-preview"
+  --base-url "https://example.com/v1" --api-key "sk-xxx" --model "gemini-3.1-flash-image-preview"
 ```
 
 ### 使用 Google 原生格式
@@ -121,7 +114,31 @@ uv run {baseDir}/scripts/generate_image.py --prompt "描述" --filename "output.
 
 ---
 
-## ⚙️ 配置参考
+## ⚙️ 环境变量
+
+在技能调用时，OpenClaw 会自动将配置文件中的环境变量注入。
+
+```json
+{
+  "skills": {
+    "entries": {
+      "wangyan-gemini-image-gen": {
+        "enabled": true,
+        "apiKey": "your-api-key",
+        "env": {
+          "GEMINI_API_KEY": "your-api-key",
+          "GEMINI_BASE_URL": "https://api.example.com/v1",
+          "GEMINI_MODEL": "gemini-3.1-flash-image-preview",
+          "GEMINI_API_FORMAT": "openai",
+          "GEMINI_TIMEOUT": "300",
+          "GEMINI_RESOLUTION": "1K",
+          "GEMINI_OUTPUT_DIR": "output/images"
+        }
+      }
+    }
+  }
+}
+```
 
 优先级：命令行参数 > 环境变量
 
@@ -135,18 +152,6 @@ uv run {baseDir}/scripts/generate_image.py --prompt "描述" --filename "output.
 | `--resolution` / `-r` | `GEMINI_RESOLUTION` | `1K`（默认）、`2K`、`4K` |
 | `--output-dir` / `-o` | `GEMINI_OUTPUT_DIR` | 输出目录（默认 `output/images`） |
 
-### 环境变量配置示例
-
-```bash
-export GEMINI_API_KEY="your-api-key"
-export GEMINI_BASE_URL="https://api.example.com/v1"
-export GEMINI_MODEL="gemini-3.1-flash-image-preview"
-export GEMINI_API_FORMAT="openai"
-export GEMINI_TIMEOUT="300"
-export GEMINI_RESOLUTION="1K"
-export GEMINI_OUTPUT_DIR="output/images"
-```
-
 可选参数：
 
 - `--input-image` / `-i`：输入图片路径（可重复，最多 14 张）
@@ -154,6 +159,8 @@ export GEMINI_OUTPUT_DIR="output/images"
 - `--style`：`natural`（默认）或 `vivid`
 - `--aspect-ratio` / `-a`：宽高比（如 `1:1`、`16:9`、`9:16`、`4:3`、`3:4`）
 - `--verbose` / `-v`：输出详细调试
+
+
 
 ---
 
