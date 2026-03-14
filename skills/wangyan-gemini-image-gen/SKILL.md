@@ -45,7 +45,7 @@ metadata:
 
 ---
 
-## 📦 依赖安装
+## 📦 安装依赖
 
 本技能需要 `python3` 和 `uv` 环境。
 
@@ -79,37 +79,27 @@ uv --version
 
 ---
 
-## 🚀 使用方法
+## 📦 安装技能
 
-### 生成图片
+### 使用 skills CLI 安装（推荐）
 
 ```bash
-uv run {baseDir}/scripts/generate_image.py --prompt "图片描述" --filename "output.png"
+# github 镜像源
+npx skills add https://github.com/wangyan/wangyan-skills/tree/main/skills/wangyan-gemini-image-gen
+
+# gitcode 镜像源 (推荐国内用户使用)
+npx skills add https://gitcode.com/wang_yan/wangyan-skills.git
 ```
 
-### 编辑图片（单图）
+### 使用 Clawhub CLI 安装
 
 ```bash
-uv run {baseDir}/scripts/generate_image.py --prompt "编辑指令" --filename "edited.png" -i "/path/input.png" --resolution 2K
-```
+# 使用 Clawhub CLI 安装
+npx clawhub@latest install wangyan-gemini-image-gen
 
-### 合成多张图片（最多 14 张）
-
-```bash
-uv run {baseDir}/scripts/generate_image.py --prompt "合成指令" --filename "composed.png" -i img1.png -i img2.png -i img3.png
-```
-
-### 自定义端点
-
-```bash
-uv run {baseDir}/scripts/generate_image.py --prompt "描述" --filename "output.png" \
-  --base-url "https://example.com/v1" --api-key "sk-xxx" --model "gemini-3.1-flash-image-preview"
-```
-
-### 使用 Google 原生格式
-
-```bash
-uv run {baseDir}/scripts/generate_image.py --prompt "描述" --filename "output.png" --api-format google
+# 使用腾讯 skillhub 安装 (推荐国内用户使用)
+curl -fsSL https://skillhub-1388575217.cos.ap-guangzhou.myqcloud.com/install/install.sh | bash  -s -- --no-skills
+skillhub install wangyan-gemini-image-gen
 ```
 
 ---
@@ -160,7 +150,40 @@ uv run {baseDir}/scripts/generate_image.py --prompt "描述" --filename "output.
 - `--aspect-ratio` / `-a`：宽高比（如 `1:1`、`16:9`、`9:16`、`4:3`、`3:4`）
 - `--verbose` / `-v`：输出详细调试
 
+---
 
+## 🚀 使用方法
+
+### 生成图片
+
+```bash
+uv run {baseDir}/scripts/generate_image.py --prompt "图片描述" --filename "output.png"
+```
+
+### 编辑图片（单图）
+
+```bash
+uv run {baseDir}/scripts/generate_image.py --prompt "编辑指令" --filename "edited.png" -i "/path/input.png" --resolution 2K
+```
+
+### 合成多张图片（最多 14 张）
+
+```bash
+uv run {baseDir}/scripts/generate_image.py --prompt "合成指令" --filename "composed.png" -i img1.png -i img2.png -i img3.png
+```
+
+### 自定义端点
+
+```bash
+uv run {baseDir}/scripts/generate_image.py --prompt "描述" --filename "output.png" \
+  --base-url "https://example.com/v1" --api-key "sk-xxx" --model "gemini-3.1-flash-image-preview"
+```
+
+### 使用 Google 原生格式
+
+```bash
+uv run {baseDir}/scripts/generate_image.py --prompt "描述" --filename "output.png" --api-format google
+```
 
 ---
 

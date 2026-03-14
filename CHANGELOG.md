@@ -1,3 +1,10 @@
+## 2026-03-14
+
+### Documentation（文档）
+- **安装文档优化**（`README.md`、`skills/wangyan-gemini-image-gen/SKILL.md`）：
+  - 新增 `gitcode` 镜像源和腾讯 `skillhub` 安装方式，优化国内用户安装体验
+  - 调整 SKILL.md 章节顺序，将"安装技能"章节移至"使用方法"之前
+
 ## 2026-03-13
 
 ### Added（新增）

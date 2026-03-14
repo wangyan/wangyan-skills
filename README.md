@@ -85,6 +85,7 @@ sudo yum install python3 python3-pip
 
 2. 安装 uv
 
+`uv` 是一个极速的 Python 包管理器，用于运行脚本和管理依赖。
 
 ```bash
 # macOS/Linux
@@ -99,14 +100,23 @@ uv --version
 
 **安装技能：**
 
+1. 使用 skills CLI 安装（推荐）
+
 ```bash
-# 使用 skills CLI 安装技能 (推荐)
-skills add https://github.com/wangyan/wangyan-skills/tree/main/skills/wangyan-gemini-image-gen
+# github 镜像源
+npx skills add https://github.com/wangyan/wangyan-skills/tree/main/skills/wangyan-gemini-image-gen
 
-# 使用 Clawhub CLI 安装技能
-clawhub install wangyan-gemini-image-gen
+# gitcode 镜像源 (推荐国内用户使用)
+npx skills add https://gitcode.com/wang_yan/wangyan-skills.git
+```
 
-# 使用 skillhub 安装技能
+2. 使用 Clawhub CLI 安装
+
+```bash
+# 使用 Clawhub CLI 安装
+npx clawhub@latest install wangyan-gemini-image-gen
+
+# 使用腾讯 skillhub 安装 (推荐国内用户使用)
 curl -fsSL https://skillhub-1388575217.cos.ap-guangzhou.myqcloud.com/install/install.sh | bash  -s -- --no-skills
 skillhub install wangyan-gemini-image-gen
 ```
