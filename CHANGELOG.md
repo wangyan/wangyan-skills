@@ -1,3 +1,22 @@
+## 2026-04-14
+
+### Refactor（重构）
+- **技能目录重命名**（`skills/`）：
+  - 移除所有技能目录的 `wangyan-` 前缀，统一简化命名
+  - 涉及：`article-illustrator`、`compress-image`、`cover-image`、`format-markdown`、`gemini-image-gen`、`markdown-to-html`、`url-to-markdown`
+
+### Changed（改进）
+- **安装文档简化**（`README.md`）：
+  - 更新安装命令为 `npx skills add -g`，无需全局安装 CLI
+  - 新增 `--skill` 参数支持安装指定技能
+  - 将技能列表改为表格格式，结构更清晰
+  - 移除 README 中冗余的依赖安装说明，聚焦核心内容
+- **Gemini 图片生成技能文档**（`skills/gemini-image-gen/SKILL.md`）：
+  - 更新技能名称为 `gemini-image-gen`（移除 `wangyan-` 前缀）
+  - 新增触发判断说明，明确触发词与不触发场景
+  - 简化环境变量配置说明，移除 `.env` 文件多路径配置
+  - 更新安装命令中的技能路径
+
 ## 2026-03-14
 
 ### Documentation（文档）
